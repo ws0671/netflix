@@ -18,23 +18,24 @@ const Loader = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const Banner = styled.div<{ bgPhoto: string }>`
+const Banner = styled.div<{ bgphoto: string }>`
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 60px;
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
-    url(${(props) => props.bgPhoto});
+    url(${(props) => props.bgphoto});
   background-size: cover;
+  background-position: center top;
 `;
 
 const Title = styled.h2`
-  font-size: 68px;
+  font-size: 4vw;
   margin-bottom: 20px;
 `;
 const Overview = styled.p`
-  font-size: 30px;
+  font-size: 1.2vw;
   width: 50%;
 `;
 
@@ -50,11 +51,11 @@ const Row = styled(motion.div)`
   width: 100%;
 `;
 
-const Box = styled(motion.div)<{ bgPhoto: string }>`
+const Box = styled(motion.div)<{ bgphoto: string }>`
   background-color: white;
   height: 200px;
   font-size: 66px;
-  background-image: url(${(props) => props.bgPhoto});
+  background-image: url(${(props) => props.bgphoto});
   background-size: cover;
   background-position: center center;
   cursor: pointer;
@@ -198,7 +199,7 @@ function Home() {
         <>
           <Banner
             onClick={increaseIndex}
-            bgPhoto={makeImagePath(data?.results[0].backdrop_path || "")}
+            bgphoto={makeImagePath(data?.results[0].backdrop_path || "")}
           >
             <Title>{data?.results[0].title}</Title>
             <Overview>{data?.results[0].overview}</Overview>
@@ -225,7 +226,7 @@ function Home() {
                       transition={{ type: "tween" }}
                       key={movie.id}
                       onClick={() => onBoxClicked(movie.id)}
-                      bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
+                      bgphoto={makeImagePath(movie.backdrop_path, "w500")}
                     >
                       <Info variants={infoVariants}>
                         <h4>{movie.title}</h4>
