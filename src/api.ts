@@ -65,3 +65,11 @@ export function getTopRatedTv() {
     `${BASE_PATH}/tv/top_rated?api_key=${API_KEY}&language=ko-KO`
   ).then((response) => response.json());
 }
+
+// search
+
+export function getSearchThings(keyword: null | string) {
+  return fetch(
+    `${BASE_PATH}/search/multi?api_key=${API_KEY}&language=en-US&query=${keyword}&page=1&include_adult=false`
+  ).then((response) => response.json());
+}
