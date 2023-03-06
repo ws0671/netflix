@@ -66,7 +66,6 @@ function Home() {
     "upcomingMovies",
     getUpcomingMovies
   );
-  console.log(latestData);
 
   return (
     <Wrapper>
@@ -82,6 +81,7 @@ function Home() {
             title="Now Playing"
             data={data as IGetMoviesResult}
             type="movies"
+            listType="nowPlay"
           />
           <Latest>
             <RowTitle>Latest Movies</RowTitle>
@@ -91,11 +91,13 @@ function Home() {
             title="Top Lated Movies"
             data={topRatedData as IGetMoviesResult}
             type="movies"
+            listType="topLated"
           />
           <Slider
             title="Upcoming Movies"
             data={upcomingData as IGetMoviesResult}
             type="movies"
+            listType="upcoming"
           />
         </>
       )}

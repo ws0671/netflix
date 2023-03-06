@@ -29,7 +29,12 @@ function Search() {
       {isLoading ? (
         <Loader>Loading...</Loader>
       ) : (
-        <Slider title="Searched Things" data={data as IGetMoviesResult} />
+        <Slider
+          title="Searched Things"
+          data={data as IGetMoviesResult}
+          type="search"
+          listType="things"
+        />
       )}
     </Wrapper>
   );

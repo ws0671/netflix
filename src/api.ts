@@ -8,6 +8,7 @@ interface IMovie {
   title: string;
   name?: string;
   overview: string;
+  vote_average: number;
 }
 
 export interface IGetMoviesResult {

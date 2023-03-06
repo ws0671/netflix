@@ -67,7 +67,6 @@ function Tv() {
     "topRatedTv",
     getTopRatedTv
   );
-  console.log(latestData);
 
   return (
     <Wrapper>
@@ -91,16 +90,19 @@ function Tv() {
             title="Airing Today TV"
             data={airingTodayData as IGetMoviesResult}
             type="tv"
+            listType="airingToday"
           />
           <Slider
             title="Popular TV"
             data={popularData as IGetMoviesResult}
             type="tv"
+            listType="popular"
           />
           <Slider
             title="Top Rated TV"
             data={topRatedData as IGetMoviesResult}
             type="tv"
+            listType="topRated"
           />
         </>
       )}

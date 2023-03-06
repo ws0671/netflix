@@ -81,6 +81,7 @@ const BigMovie = styled(motion.div)<{ scrolly: number }>`
   border-radius: 15px;
   overflow: hidden;
   background-color: ${(props) => props.theme.black.lighter};
+  z-index: 99;
 `;
 
 const BigCover = styled.div`
@@ -103,6 +104,13 @@ const BigOverview = styled.p`
   color: ${(props) => props.theme.white.lighter};
 `;
 
+const BigVote = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 400px;
+  font-size: 20px;
+  font-weight: 600;
+`;
 const ArrowButton = styled.div`
   position: absolute;
   font-size: 2rem;
@@ -174,12 +182,15 @@ const offset = 6;
 interface ISlider {
   data: IGetMoviesResult;
   title: string;
-  type?: string;
+  type: string;
+  listType: string;
 }
 
-function Slider({ title, data, type }: ISlider) {
+function Slider({ title, data, type, listType }: ISlider) {
   const navigate = useNavigate();
-  const bigMovieMatch: PathMatch<string> | null = useMatch(`/${type}/:movieId`);
+  const bigMovieMatch: PathMatch<string> | null = useMatch(
+    `/${type}/${listType}/:movieId`
+  );
 
   const { scrollY } = useScroll();
   const [index, setIndex] = useState(0);
@@ -200,17 +211,16 @@ function Slider({ title, data, type }: ISlider) {
   };
   const toggleLeaving = (value: boolean) => setLeaving(value);
   const onBoxClicked = (movieId: number) => {
-    navigate(`/${type}/${movieId}`);
+    navigate(`/${type}/${listType}/${movieId}`);
   };
   const onOverlayClick = () => navigate(-1);
-
-  console.log(bigMovieMatch);
 
   const clickedMovie =
     bigMovieMatch?.params.movieId &&
     data?.results.find(
       (movie) => String(movie.id) === bigMovieMatch.params.movieId
     );
+
   return (
     <>
       <SliderBox>
@@ -241,7 +251,7 @@ function Slider({ title, data, type }: ISlider) {
                 .slice(offset * index, offset * index + offset)
                 .map((movie) => (
                   <Box
-                    layoutId={movie.id + "" + Date.now()}
+                    layoutId={movie.id + "" + listType}
                     whileHover="hover"
                     initial="normal"
                     variants={boxVariants}
@@ -268,7 +278,7 @@ function Slider({ title, data, type }: ISlider) {
               animate={{ opacity: 1 }}
             />
             <BigMovie
-              layoutId={bigMovieMatch.params.movieId}
+              layoutId={bigMovieMatch.params.movieId + "" + listType}
               scrolly={scrollY.get()}
             >
               {clickedMovie && (
@@ -282,6 +292,7 @@ function Slider({ title, data, type }: ISlider) {
                     }}
                   />
                   <BigTitle>{clickedMovie.title ?? clickedMovie.name}</BigTitle>
+                  <BigVote>Rating: {clickedMovie.vote_average}</BigVote>
                   <BigOverview>{clickedMovie.overview}</BigOverview>
                 </>
               )}
