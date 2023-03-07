@@ -3,11 +3,12 @@ import { getSearchThings, IGetMoviesResult } from "../api";
 import { useQuery } from "react-query";
 import styled from "styled-components";
 import Slider from "../Components/Slider";
+import { useEffect } from "react";
 
 const Wrapper = styled.div`
   background: black;
   overflow-x: hidden;
-  margin-top: 200px;
+  padding-top: 200px;
 `;
 const Loader = styled.div`
   height: 20vh;
