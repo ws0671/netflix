@@ -3,7 +3,7 @@ import { getSearchThings, IGetMoviesResult } from "../api";
 import { useQuery } from "react-query";
 import styled from "styled-components";
 import Slider from "../Components/Slider";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Wrapper = styled.div`
   background: black;
@@ -17,11 +17,12 @@ const Loader = styled.div`
   align-items: center;
 `;
 function Search() {
+  // const [keyword, setKeyword] = useState();
   const location = useLocation();
+  // setKeyword(new URLSearchParams(location.search).get("keyword"));
   const keyword = new URLSearchParams(location.search).get("keyword");
-
   const { data, isLoading } = useQuery<IGetMoviesResult>(
-    ["things", "nowPlaying"],
+    ["things", keyword],
     () => getSearchThings(keyword)
   );
 
